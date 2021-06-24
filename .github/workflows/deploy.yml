@@ -1,0 +1,19 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+      - training
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "knowledge-rating-api"
+          heroku_email: "slamser56@gmail.com"
+          usedocker: true
+        env:
+          MONGO_DB_URI: ${{ secrets.MONGO_DB_URI }}
