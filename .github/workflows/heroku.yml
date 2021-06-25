@@ -8,13 +8,13 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           docker_heroku_process_type: web
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: 'https://"$HEROKU_APP_NAME".herokuapp.com/health'
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          healthcheck: 'https://${HEROKU_APP_NAME}.herokuapp.com/health'
           checkstring: "ok"
           usedocker: true
         env:
-          HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
-          HD_MONGO_DB_URI: ${{secrets.MONGO_DB_URI}}
-          HD_PORT: ${{secrets.PORT}}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          HD_MONGO_DB_URI: ${{ secrets.MONGO_DB_URI }}
+          HD_PORT: ${{ secrets.PORT }}
