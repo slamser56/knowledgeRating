@@ -12,6 +12,9 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           justlogin: true
+        env:
+          MONGO_DB_URI: ${{secrets.MONGO_DB_URI}}
+          PORT: ${{secrets.PORT}}
 
       - name: "Login to heroku registry"
         run: heroku container:login
