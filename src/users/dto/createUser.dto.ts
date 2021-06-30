@@ -1,12 +1,15 @@
-export class CreateUserDto {
-  name: string;
-  age: number;
-  language: string;
-  specialization: string;
-}
+import { IsString, IsInt } from 'class-validator';
 
-export class UpdateUserDto {
+export class CreateUserDto {
+  @IsString()
+  name: string;
+
+  @IsInt()
   age: number;
+
+  @IsString()
   language: string;
+
+  @IsString()
   specialization: string;
 }
