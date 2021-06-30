@@ -19,7 +19,7 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateUserDto): User {
     const id = this.usersService.create(createUserDto);
     return { ...createUserDto, id };
   }
