@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/createUser.dto';
@@ -17,11 +17,7 @@ export class UsersService {
   }
 
   async update(id: string, userDto: UpdateUserDto): Promise<User> {
-    const user = await this.userModel.findByIdAndUpdate(id, userDto);
-    if (user) {
-      return user;
-    }
-    throw new HttpException({ status: HttpStatus.NOT_FOUND }, HttpStatus.NOT_FOUND);
+    return this.userModel.findByIdAndUpdate(id, userDto);
   }
 
   async findAll(): Promise<User[]> {
@@ -29,18 +25,10 @@ export class UsersService {
   }
 
   async find(id: string): Promise<User> {
-    const user = await this.userModel.findById(id);
-    if (user) {
-      return user;
-    }
-    throw new HttpException({ status: HttpStatus.NOT_FOUND }, HttpStatus.NOT_FOUND);
+    return this.userModel.findById(id);
   }
 
   async delete(id: string): Promise<User> {
-    const user = await this.userModel.findByIdAndDelete(id);
-    if (user) {
-      return user;
-    }
-    throw new HttpException({ status: HttpStatus.NOT_FOUND }, HttpStatus.NOT_FOUND);
+    return this.userModel.findByIdAndDelete(id);
   }
 }
