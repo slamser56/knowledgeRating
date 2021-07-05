@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
-import { ExcludeNullInterceptor } from 'src/interceptors/excludeNull.interceptor';
+import { ExcludeNullInterceptor } from 'interceptors/excludeNull.interceptor';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { User } from './schemas/user.schema';
@@ -16,8 +16,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  find(@Param('id') id: string): Promise<User> {
-    return this.usersService.find(id);
+  findById(@Param('id') id: string): Promise<User> {
+    return this.usersService.findById(id);
   }
 
   @Post()

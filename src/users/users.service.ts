@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { hash } from 'bcrypt';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { User, UserDocument } from './schemas/user.schema';
@@ -9,10 +10,9 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  private readonly users: User[] = [];
-
   async create(userDto: CreateUserDto): Promise<User> {
-    const newUser = new this.userModel(userDto);
+    const password = await hash(userDto.password, 10);
+    const newUser = new this.userModel({ ...userDto, password });
     return newUser.save();
   }
 
@@ -21,11 +21,15 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
+    return this.userModel.find();
   }
 
-  async find(id: string): Promise<User> {
+  async findById(id: string): Promise<User> {
     return this.userModel.findById(id);
+  }
+
+  async findByUsername(username: string): Promise<User> {
+    return this.userModel.findOne({ username });
   }
 
   async delete(id: string): Promise<User> {

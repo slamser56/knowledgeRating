@@ -5,9 +5,10 @@ import { APP_FILTER, APP_PIPE } from '@nestjs/core/constants';
 import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
 import { HttpExceptionFilter } from './filters/httpException.filter';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB_URI), UsersModule],
+  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB_URI), UsersModule, AuthModule],
   controllers: [AppController],
   providers: [
     {

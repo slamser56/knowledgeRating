@@ -19,5 +19,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'max-len': ['error', { code: 130 }],
     'import/order': ['error', { 'newlines-between': 'never' }],
+    '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
   },
 };
