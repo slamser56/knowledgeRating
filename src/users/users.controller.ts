@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { Public } from 'decorators/public.decorator';
 import { ExcludeNullInterceptor } from 'interceptors/excludeNull.interceptor';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
@@ -10,11 +11,13 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Public()
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findById(@Param('id') id: string): Promise<User> {
     return this.usersService.findById(id);

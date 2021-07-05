@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
   async validateUser(username: string, password: string): Promise<Omit<User, 'password'>> {
-    const user = await this.usersService.findByUsername(username);
+    const user = await this.usersService.findByUsernameQuery(username).select('+password').exec();
     const isCompared = compare(password, user?.password);
     if (isCompared) {
       return user;

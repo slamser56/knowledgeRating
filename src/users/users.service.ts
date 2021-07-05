@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import { hash } from 'bcrypt';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
@@ -17,22 +17,22 @@ export class UsersService {
   }
 
   async update(id: string, userDto: UpdateUserDto): Promise<User> {
-    return this.userModel.findByIdAndUpdate(id, userDto);
+    return this.userModel.findByIdAndUpdate(id, userDto).exec();
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.find();
+    return this.userModel.find().exec();
   }
 
   async findById(id: string): Promise<User> {
-    return this.userModel.findById(id);
+    return this.userModel.findById(id).exec();
   }
 
-  async findByUsername(username: string): Promise<User> {
+  findByUsernameQuery(username: string): Query<UserDocument, UserDocument> {
     return this.userModel.findOne({ username });
   }
 
   async delete(id: string): Promise<User> {
-    return this.userModel.findByIdAndDelete(id);
+    return this.userModel.findByIdAndDelete(id).exec();
   }
 }
