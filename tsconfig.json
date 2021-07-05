@@ -13,10 +13,6 @@
     "incremental": true,
     "paths": {
       "*": ["src/*"],
-      "utils": ["src/utils/*"],
-      "guards": ["src/guards/*"],
-      "filters": ["src/filters/*"],
-      "interceptors": ["src/interceptors/*"],
     },
   }
 }

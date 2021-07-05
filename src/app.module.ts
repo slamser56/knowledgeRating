@@ -1,7 +1,8 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { APP_FILTER, APP_PIPE } from '@nestjs/core/constants';
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core/constants';
+import { JwtAuthGuard } from 'guards/jwtAuth.guard';
 import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
 import { HttpExceptionFilter } from './filters/httpException.filter';
@@ -18,6 +19,10 @@ import { AuthModule } from './auth/auth.module';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
     },
   ],
 })
