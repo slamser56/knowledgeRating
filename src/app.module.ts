@@ -8,9 +8,10 @@ import { HttpExceptionFilter } from 'filters/httpException.filter';
 import { UsersModule } from 'users/users.module';
 import { AppController } from 'app.controller';
 import { AuthModule } from 'auth/auth.module';
+import { ArticlesModule } from './articles/articles.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB_URI), UsersModule, AuthModule],
+  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB_URI), UsersModule, AuthModule, ArticlesModule],
   controllers: [AppController],
   providers: [
     {

@@ -10,21 +10,21 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async create(userDto: CreateUserDto): Promise<User> {
+  async create(userDto: CreateUserDto): Promise<UserDocument> {
     const password = await hash(userDto.password, 10);
     const newUser = new this.userModel({ ...userDto, password });
     return newUser.save();
   }
 
-  async update(id: string, userDto: UpdateUserDto): Promise<User> {
+  async update(id: string, userDto: UpdateUserDto): Promise<UserDocument> {
     return this.userModel.findByIdAndUpdate(id, userDto).exec();
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<UserDocument[]> {
     return this.userModel.find().exec();
   }
 
-  async findById(id: string): Promise<User> {
+  async findById(id: string): Promise<UserDocument> {
     return this.userModel.findById(id).exec();
   }
 
@@ -32,7 +32,7 @@ export class UsersService {
     return this.userModel.findOne({ username });
   }
 
-  async delete(id: string): Promise<User> {
+  async delete(id: string): Promise<UserDocument> {
     return this.userModel.findByIdAndDelete(id).exec();
   }
 }

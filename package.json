@@ -23,6 +23,7 @@
     "ci": "rm -rf node_modules && yarn install --frozen-lockfile"
   },
   "dependencies": {
+    "@casl/ability": "5.3.1",
     "@nestjs/common": "7.6.15",
     "@nestjs/config": "0.6.3",
     "@nestjs/core": "7.6.15",

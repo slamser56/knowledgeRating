@@ -5,7 +5,7 @@ import { Role } from 'enums/role.enum';
 import { ExcludeNullInterceptor } from 'interceptors/excludeNull.interceptor';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
-import { User } from './schemas/user.schema';
+import { UserDocument } from './schemas/user.schema';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -15,31 +15,31 @@ export class UsersController {
 
   @Public()
   @Get()
-  findAll(): Promise<User[]> {
+  findAll(): Promise<UserDocument[]> {
     return this.usersService.findAll();
   }
 
   @Public()
   @Get(':id')
-  findById(@Param('id') id: string): Promise<User> {
+  findById(@Param('id') id: string): Promise<UserDocument> {
     return this.usersService.findById(id);
   }
 
   @Post()
   @Roles(Role.Admin)
-  create(@Body() userDto: CreateUserDto): Promise<User> {
+  create(@Body() userDto: CreateUserDto): Promise<UserDocument> {
     return this.usersService.create(userDto);
   }
 
   @Put(':id')
   @Roles(Role.Admin)
-  update(@Param('id') id: string, @Body() userDto: UpdateUserDto): Promise<User> {
+  update(@Param('id') id: string, @Body() userDto: UpdateUserDto): Promise<UserDocument> {
     return this.usersService.update(id, userDto);
   }
 
   @Delete(':id')
   @Roles(Role.Admin)
-  delete(@Param('id') id: string): Promise<User> {
+  delete(@Param('id') id: string): Promise<UserDocument> {
     return this.usersService.delete(id);
   }
 }
