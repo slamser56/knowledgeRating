@@ -5,13 +5,21 @@ import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core/constants';
 import { JwtAuthGuard } from 'guards/jwtAuth.guard';
 import { RolesGuard } from 'guards/roles.guard';
 import { HttpExceptionFilter } from 'filters/httpException.filter';
-import { UsersModule } from 'users/users.module';
+import { UsersModule } from 'modules/users/users.module';
 import { AppController } from 'app.controller';
-import { AuthModule } from 'auth/auth.module';
-import { ArticlesModule } from './articles/articles.module';
+import { AuthModule } from 'modules/auth/auth.module';
+import { ArticlesModule } from './modules/articles/articles.module';
+import { CaslModule } from './modules/casl/casl.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB_URI), UsersModule, AuthModule, ArticlesModule],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_DB_URI),
+    UsersModule,
+    AuthModule,
+    ArticlesModule,
+    CaslModule,
+  ],
   controllers: [AppController],
   providers: [
     {
