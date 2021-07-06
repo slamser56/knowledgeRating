@@ -3,10 +3,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core/constants';
 import { JwtAuthGuard } from 'guards/jwtAuth.guard';
-import { UsersModule } from './users/users.module';
-import { AppController } from './app.controller';
-import { HttpExceptionFilter } from './filters/httpException.filter';
-import { AuthModule } from './auth/auth.module';
+import { RolesGuard } from 'guards/roles.guard';
+import { HttpExceptionFilter } from 'filters/httpException.filter';
+import { UsersModule } from 'users/users.module';
+import { AppController } from 'app.controller';
+import { AuthModule } from 'auth/auth.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_DB_URI), UsersModule, AuthModule],
@@ -23,6 +24,10 @@ import { AuthModule } from './auth/auth.module';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })
